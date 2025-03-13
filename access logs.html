@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Access Logs</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Add your CSS here */
+        :root {
+    --primary-color: #6c5ce7; /* More vibrant purple */
+    --light-gray: #1e1e1e; /* Darker, modern background */
+    --border-color: #333; /* Darker border */
+    --box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Stronger shadow */
+    --text-color: #e0e0e0; /* Lighter text for contrast */
+    --accent-color: #00bcd4; /* Accent color for highlights */
+    --transition-speed: 0.3s;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--light-gray);
+    color: var(--text-color);
+    margin: 0;
+    display: flex;
+    min-height: 100vh;
+    transition: background-color var(--transition-speed);
+}
+
+h1 {
+    background: linear-gradient(to right, var(--primary-color), var(--accent-color)); /* Gradient header */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5em; /* Larger header */
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+#sidebar {
+    width: 250px; /* Wider sidebar */
+    background-color: #2c2c2c; /* Darker sidebar */
+    color: var(--text-color);
+    padding: 30px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    box-shadow: 4px 0 8px rgba(0, 0, 0, 0.3);
+    transition: width var(--transition-speed), background-color var(--transition-speed);
+}
+
+#sidebar a {
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 15px 30px;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+#sidebar a:hover {
+    background-color: #444;
+    color: var(--accent-color);
+}
+
+#main-content {
+    flex-grow: 1;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    transition: padding var(--transition-speed);
+}
+
+#modules {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); /* Larger modules */
+    gap: 30px;
+    flex-grow: 1;
+}
+
+.module {
+    border: 1px solid var(--border-color);
+    padding: 30px;
+    background: linear-gradient(145deg, #303030, #282828); /* Subtle gradient */
+    box-shadow: var(--box-shadow);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.module:hover {
+    transform: scale(1.03);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+}
+
+.module h2 {
+    color: var(--accent-color);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    font-size: 1.3em;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    table-layout: fixed;
+}
+
+th, td {
+    padding: 15px;
+    border-bottom: 1px solid var(--border-color);
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+th {
+    background-color: #444;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.loading {
+    text-align: center;
+    color: #888;
+    font-style: italic;
+}
+    </style>
+</head>
+<body>
+    <h1>Access Logs</h1>
+    <div id="access_logs" class="loading">Loading...</div>
+    <a href="index.html">Back to Main</a>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+    <script>
+        const socket = io();
+        socket.on('connect', () => {
+            console.log('Connected');
+            socket.emit('request_data', 'access_logs');
+        });
+
+        socket.on('data_update', (data) => {
+            if (data.access_logs) {
+                displayData(data.access_logs, 'access_logs');
+            }
+        });
+
+        function displayData(data, elementId) {
+            // Your displayData function from index.html
+            const container = document.getElementById(elementId);
+            container.classList.remove("loading");
+            container.innerHTML = "";
+            //...rest of the display data function.
+        }
+    </script>
+</body>
+</html>
