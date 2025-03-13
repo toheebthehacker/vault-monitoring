@@ -325,7 +325,7 @@ if (storedLogin === 'true') {
     loginModal.style.display = 'none';
     document.getElementById('main-content').style.display = 'flex';
     document.getElementById('cameraFeed').style.display = 'block';
-    document.getElementById('cameraFeed').src = 'YOUR_CAMERA_STREAM_URL';
+    document.getElementById('cameraFeed').src = 'https://www.earthcam.com/usa/virginia/charlottesville/?cam=charlottesville_airport#google_vignette';
     content.style.display = 'flex';
 }
 
@@ -342,7 +342,7 @@ if (storedLogin === 'true') {
                 isLoggedIn = true; // Set login status to true
                 localStorage.setItem('isLoggedIn', 'true'); // Store login state
         document.getElementById('cameraFeed').style.display = 'block';
-        document.getElementById('cameraFeed').src = 'YOUR_CAMERA_STREAM_URL';
+        document.getElementById('cameraFeed').src = 'https://www.earthcam.com/usa/virginia/charlottesville/?cam=charlottesville_airport#google_vignette';
                 updateModules({}); // Request initial data after login
             } else {
                 errorMessage.textContent = 'Invalid username or password.';
@@ -359,7 +359,7 @@ if (storedLogin === 'true') {
 });
 
             document.getElementById('cameraFeed').style.display = 'block';
-            document.getElementById('cameraFeed').src = 'YOUR_CAMERA_STREAM_URL'; // Replace with your camera stream URL
+            document.getElementById('cameraFeed').src = 'https://www.earthcam.com/usa/virginia/charlottesville/?cam=charlottesville_airport#google_vignette'; // Replace with your camera stream URL
         });
 
         function updateModules(data) {
